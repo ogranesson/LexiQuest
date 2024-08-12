@@ -22,5 +22,12 @@
                 </div>
             </div>
         @endforeach
+
+        <form id="post-form" method="POST" action="{{ route('submit-post', ['id' => $topic->id]) }}">
+            @csrf
+            @method('POST')
+            <textarea id="post-text" name="post-text" autocomplete="off"></textarea>
+            <button type="submit" id="post-submit">Post</button>
+        </form>
     </div>
 </x-main-layout>

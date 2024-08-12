@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,3 +10,7 @@ Route::get('/', function () {
 
 // topic routes
 Route::get('/topic/{id}', [TopicController::class, 'show'])->name('topic');
+
+// post routes
+
+Route::post('/topic/{id}/post', [PostController::class, 'post'])->name('submit-post');
