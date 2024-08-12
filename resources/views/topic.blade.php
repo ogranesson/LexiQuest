@@ -19,6 +19,11 @@
                 <p> Posted by <b> {{ $post->first_name}} {{ $post->last_name }} on {{ $post->created_on }} </b></p>
                 <div class="post visible">
                     <p class="post-content"> {{ $post->content }} </p>
+                    <form method="POST" class="delete-form" action="{{ route('delete-post', ['id' => $topic->id, 'post_id' => $post->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
                 </div>
             </div>
         @endforeach

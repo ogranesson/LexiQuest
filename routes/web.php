@@ -12,5 +12,5 @@ Route::get('/', function () {
 Route::get('/topic/{id}', [TopicController::class, 'show'])->name('topic');
 
 // post routes
-
 Route::post('/topic/{id}/post', [PostController::class, 'post'])->name('submit-post');
+Route::delete('/topic/{id}/{post_id}/delete', [PostController::class, 'delete'])->name('delete-post');

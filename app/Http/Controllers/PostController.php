@@ -19,4 +19,11 @@ class PostController extends Controller
 
         return redirect()->route('topic', ['id'=>$topic_id]);
     }
+
+    public function delete(Request $request, $topic_id, $post_id) {
+        $post = Post::findOrFail($post_id);
+        $post->delete();
+        
+        return redirect()->route('topic', ['id'=>$topic_id]);
+    }
 }
