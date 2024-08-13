@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\PostController;
@@ -15,3 +16,7 @@ Route::get('/topic/{id}', [TopicController::class, 'show'])->name('topic');
 Route::post('/topic/{id}/post', [PostController::class, 'post'])->name('submit-post');
 Route::post('/topic/{id}/{post_id}/edit', [PostController::class, 'edit'])->name('edit-post');
 Route::delete('/topic/{id}/{post_id}/delete', [PostController::class, 'delete'])->name('delete-post');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
