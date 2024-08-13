@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -49,9 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['nullable', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'photo' => ['mimes:jpg,jpeg,png', 'max:20480'],
         ]);
     }
 
@@ -63,10 +68,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $path = 'avatars/default.png';
+
+        if (isset($data['photo'])) {
+            $filename = time() . '_' . $data['photo']->getClientOriginalName();
+            $data['photo']->move(public_path('avatars'), $filename);
+            $path = 'avatars/' . $filename;
+        }
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'photo' => $path,
         ]);
     }
 }
