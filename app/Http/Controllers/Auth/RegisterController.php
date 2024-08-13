@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
@@ -70,10 +72,16 @@ class RegisterController extends Controller
     {
         $path = 'avatars/default.png';
 
-        if (isset($data['photo'])) {
-            $filename = time() . '_' . $data['photo']->getClientOriginalName();
-            $data['photo']->move(public_path('avatars'), $filename);
-            $path = 'avatars/' . $filename;
+        if (request()->hasFile('photo')) {
+            $manager = new ImageManager(new Driver([]));
+            $image = $manager->read(request()->file('photo'));
+            $size = min($image->width(), $image->height());
+            $image->crop($size, $size, position: 'center');
+
+            $extension = request()->file('photo')->getClientOriginalExtension();
+            $path = 'avatars/' . time() . '_' . Str::random(40) . '.' . $extension;
+
+            $image->save(public_path($path));
         }
 
         return User::create([
