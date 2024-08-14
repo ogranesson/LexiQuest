@@ -6,11 +6,9 @@ use App\Http\Controllers\TopicController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Middleware\AdminCheck;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Middleware\AdminCheck;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 Auth::routes();
 
@@ -53,3 +51,11 @@ Route::get('/not-found', function() {
 Route::fallback(function () {
     return redirect()->route('not-found')->setStatusCode('404');
 });
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/', function () {
+    return view('home');
+})->middleware([RedirectIfAuthenticated::class]);

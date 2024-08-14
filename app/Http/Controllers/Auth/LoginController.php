@@ -24,7 +24,7 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         if ($this->attemptLogin($request)) {
-            $request->session()->regenerate();
+            $request->session()->regenerateToken();
             return redirect('/home');
         }
     }
