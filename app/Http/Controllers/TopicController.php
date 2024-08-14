@@ -34,7 +34,7 @@ class TopicController extends Controller
                         ->get();
             return view('topic', ['topic' => $topic, 'author' => $author, 'posts' => $posts, 'categories' => $categories]);
         } catch (ModelNotFoundException $e) {
-            return response()->view('404', [], 404);
+            return redirect()->route('not-found')->setStatusCode(404);
         }
     }
 }
