@@ -31,12 +31,12 @@
                 </li>
             @endif
         @else
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href={{ route('view-profile', ['username' => Auth::user()->username] )}} role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <li class="group relative">
+                <a id="navbarDropdown" class="" href={{ route('view-profile', ['username' => Auth::user()->username] )}} role="button">
                     {{ Auth::user()->first_name }}
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <div class="opacity-0 absolute -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
