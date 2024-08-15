@@ -37,19 +37,9 @@ Route::middleware([AdminCheck::class])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'view'])->name('view-dashboard');
 });
 
-//forbidden page
-Route::get('/forbidden', function() {
-    return response()->view('403', [], 403);
-})->name('forbidden');
-
-//not found page
-Route::get('/not-found', function() {
-    return response()->view('404', [], 404);
-})->name('not-found');
-
 // catch any other URLs
 Route::fallback(function () {
-    return redirect()->route('not-found')->setStatusCode('404');
+    return response()->view('404', [], 404);
 });
 
 Route::get('/', function () {

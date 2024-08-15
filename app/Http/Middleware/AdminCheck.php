@@ -17,7 +17,7 @@ class AdminCheck
             return $next($request);
         }
         else {
-            return redirect()->route('forbidden')->setStatusCode(403);
+            return response()->view('403', [], 403);
         }
     }
 }
