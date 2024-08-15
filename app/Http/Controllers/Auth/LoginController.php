@@ -27,6 +27,10 @@ class LoginController extends Controller
             $request->session()->regenerateToken();
             return redirect('/home');
         }
+
+        return redirect()->back()->withErrors([
+            'login' => 'The email, username or password provided is incorrect.',
+        ]);
     }
 
     protected function validateLogin(Request $request)
