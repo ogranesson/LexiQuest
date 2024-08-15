@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,9 +20,11 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('country')->default('Not specified');
             $table->boolean('is_admin')->default(0);
             $table->boolean('is_banned')->default(0);
             $table->string('photo')->default('');
+            $table->timestamp('created_on')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

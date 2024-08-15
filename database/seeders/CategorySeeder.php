@@ -26,6 +26,24 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Trivia'
             ],
+            [
+                'name' => 'Grammar'
+            ],
+            [
+                'name' => 'Proficiency'
+            ],
+            [
+                'name' => 'Italian / Italiano'
+            ],
+            [
+                'name' => 'French / Français'
+            ],
+            [
+                'name' => 'Spanish / Español'
+            ],
+            [
+                'name' => 'Japanese / 日本語'
+            ],
         ]);
     }
 }
