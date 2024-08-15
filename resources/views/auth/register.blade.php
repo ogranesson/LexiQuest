@@ -69,6 +69,25 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label for="country" class="col-md-4 col-form-label text-md-end">{{ __('Country') }}</label>
+    
+                                <div class="col-md-6">
+                                    <select id="country" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}">
+                                        <option value="Not specified" selected>Not specified</option>
+                                        @foreach($countries as $country)
+                                            <option value="{{ $country }}">{{ $country }}</option>
+                                        @endforeach
+                                    </select>
+    
+                                    @error('country')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
     
                             <div class="row mb-3">
                                 <label for="photo" class="col-md-4 col-form-label text-md-end">{{ __('Profile picture') }}</label>

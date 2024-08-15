@@ -5,4 +5,5 @@
         <p>Middle name: {{ $user->middle_name }}</p>
     @endif
     <p>Last name: {{ $user->last_name }}</p>
+    <p>Created {{ $diff }}</p>
 </x-main-layout>
