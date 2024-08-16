@@ -34,7 +34,19 @@ class TopicController extends Controller
                         ->get();
             return view('topic', ['topic' => $topic, 'author' => $author, 'posts' => $posts, 'categories' => $categories]);
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('not-found')->setStatusCode(404);
+            return response()->view('errors.404', [], 404);
         }
+    }
+
+    public function show_create() {
+        $categories = DB::table('categories')
+                        ->select('categories.name')
+                        ->get();
+
+        return view('create-topic', ['categories' => $categories]);
+    }
+
+    public function create() {
+        //
     }
 }

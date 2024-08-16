@@ -22,6 +22,8 @@ Route::group(['middleware' => function ($request, $next) {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // topic routes
+    Route::get('/topic/create', [TopicController::class, 'show_create'])->name('create-topic');
+    Route::post('/topic/create/submit', [TopicController::class, 'create'])->name('submit-topic');
     Route::get('/topic/{id}', [TopicController::class, 'show'])->name('topic');
 
     // post routes
@@ -39,7 +41,7 @@ Route::middleware([AdminCheck::class])->group(function() {
 
 // catch any other URLs
 Route::fallback(function () {
-    return response()->view('404', [], 404);
+    return response()->view('errors.404', [], 404);
 });
 
 Route::get('/', function () {

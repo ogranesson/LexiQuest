@@ -17,7 +17,7 @@ class AdminCheck
             return $next($request);
         }
         else {
-            return response()->view('403', [], 403);
+            return response()->view('errors.403', [], 403);
         }
     }
 }
