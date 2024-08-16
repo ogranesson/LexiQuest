@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function post(Request $request, $topic_id) {
         $content = $request->input('post-text');
-        $user_id = 1; // placeholder
-
+        $user_id = Auth::user()->id;
         Post::create([
             'content' => $content,
             'user_id' => $user_id,
