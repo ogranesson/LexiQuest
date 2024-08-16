@@ -17,16 +17,20 @@ class AdminController extends Controller
 
     public function yearlyData() {
         $results = DB::table('posts')
-                    ->select(DB::raw("DATE_FORMAT(created_on, '%M') AS month"), DB::raw('COUNT(*) AS post_count'))
-                    ->where(DB::raw("YEAR(created_on)"), "=", "YEAR(CURDATE())")
-                    ->groupBy('month')
-                    ->orderBy(DB::raw('MIN(created_on)'))
+                    ->select(
+                        DB::raw("DATE_FORMAT(created_on, '%M') AS month"),
+                        DB::raw('COUNT(*) AS post_count')
+                    )
+                    ->whereYear('created_on', date('Y'))  // Filter by the current year
+                    ->groupBy(DB::raw("DATE_FORMAT(created_on, '%M')"))  // Group by month name
+                    ->orderBy(DB::raw("created_on"))
                     ->get()
                     ->toArray();
 
         $labels = [];
         $data = [];
-
+        
+        // Loop through each result and add the month and number of posts to arrays for the chart
         foreach($results as $result) {
             $labels[] = $result->month;
             $data[] = $result->post_count;
@@ -49,10 +53,11 @@ class AdminController extends Controller
             'plugins' => [
                 'title' => [
                     'display' => true,
-                    'text' => 'Monthly posts'
+                    'text' => 'Posts per month'
                 ]
             ]
         ]);
+        
         return compact("chart");
     }
 }

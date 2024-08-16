@@ -36,6 +36,7 @@
                     {{ Auth::user()->first_name }}
                 </a>
 
+
                 <div class="opacity-0 absolute -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -48,6 +49,13 @@
                     </form>
                 </div>
             </li>
+            @if (Auth::user()->is_admin == 1)
+                <li class="nav-item">
+                    <a href="{{ route('view-dashboard') }}" role="button">
+                        Admin Dashboard
+                    </a>
+                </li>
+            @endif
         @endguest
     </div>
     <div class="p-3">
