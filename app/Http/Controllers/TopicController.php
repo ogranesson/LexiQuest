@@ -46,7 +46,7 @@ class TopicController extends Controller
         return view('create-topic', ['categories' => $categories]);
     }
 
-    public function create() {
+    public function create(Request $request) {
         //
     }
 }

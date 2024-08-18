@@ -1,3 +1,3 @@
 <x-main-layout>
-    Hi
+    <form method="POST" action="{{ route('submit-topic')}}">
 </x-main-layout>

@@ -1,5 +1,4 @@
 <x-main-layout title="Login - LinguaQuest">
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -14,7 +13,7 @@
                                 <label for="login" class="col-md-4 col-form-label text-md-end">{{ __('Email address or username') }}</label>
     
                                 <div class="col-md-6">
-                                    <input id="login" type="login" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
+                                    <input id="login" type="login" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="on" autofocus>
     
                                     @error('login')
                                         <span class="invalid-feedback" role="alert">
@@ -63,5 +62,4 @@
             </div>
         </div>
     </div>
-    </x-main-layout>
-    
+</x-main-layout>

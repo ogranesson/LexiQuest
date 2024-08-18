@@ -152,5 +152,4 @@
             </div>
         </div>
     </div>
-    </x-main-layout>
-    
+</x-main-layout>
