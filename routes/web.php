@@ -12,6 +12,10 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 
 Auth::routes();
 
+Route::get('/', function () { // Redirect if authenticated
+    return view(Auth::check() ? 'home' : 'welcome');
+});
+
 Route::group(['middleware' => function ($request, $next) {
     if (!Auth::check()) {
         return redirect()->route('register')->with('alert', 'You need to be logged in to access that page.');
@@ -43,11 +47,3 @@ Route::middleware([AdminCheck::class])->group(function() {
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/', function () {
-    return view('home');
-})->middleware([RedirectIfAuthenticated::class]);

@@ -25,7 +25,7 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
             $request->session()->regenerateToken();
-            return redirect('/home');
+            return redirect('/');
         }
 
         return redirect()->back()->withErrors([

@@ -1,4 +1,4 @@
-<x-main-layout>
+<x-main-layout title="Admin Dashboard">
     Welcome to the admin page.
     <x-chartjs-component :chart="$monthlyPosts" />
     <x-chartjs-component :chart="$weeklyPosts" />
