@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -50,6 +51,26 @@ class TopicController extends Controller
     }
 
     public function create(Request $request) {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'categories' => 'required|array',
+        ]);
+
+        $name = $request->get('name');
+        $categories = $request->get('categories');
+        $user_id = Auth::user()->id;
+        do {
+            $id = random_int(1001234, 2000000);
+        } while (Topic::find($id) !== null);
+
+        $new_topic = Topic::create([
+            'id' => $id,
+            'user_id' => $user_id,
+            'name' => $name
+        ]);
+
+        $new_topic->categories()->attach($categories);
+
+        return redirect()->route('topic', ['id' => $id]);
     }
 }

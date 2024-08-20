@@ -19,6 +19,6 @@ class Category extends Model
 
     public function topics(): BelongsToMany
     {
-        return $this->belongsToMany(Topic::class);
+        return $this->belongsToMany(Topic::class, 'topic_categories');
     }
 }

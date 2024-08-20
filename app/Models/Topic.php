@@ -17,6 +17,7 @@ class Topic extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'name',
         'user_id',
         'category_id',
@@ -33,6 +34,6 @@ class Topic extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'topic_categories');
     }
 }

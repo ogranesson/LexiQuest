@@ -19,7 +19,7 @@ class ProfileController extends Controller
             $user_creation = Carbon::parse($user->created_on);
 
             $diff = $user_creation->diffForHumans($now);
-            Log::info($user_creation->floatDiffInDays($now));
+
             return view('profile', ['user' => $user, 'diff' => $diff]);
         } catch (ModelNotFoundException $e) {
             return response()->view('404', [], 404);

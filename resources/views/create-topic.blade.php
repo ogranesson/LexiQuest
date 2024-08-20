@@ -4,8 +4,16 @@
         asset('js/create-topic.js')
     ]">
     <form method="POST" action="{{ route('submit-topic')}}">
-        <label for="title">What's the title?</label>
-        <input type="text" id="title" name="title" />
+        @csrf
+        @method('POST')
+        <label for="name">What's the title?</label>
+        <input type="text" id="name" name="name" />
+
+        @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
 
         <div class="flex row">
         
@@ -21,5 +29,14 @@
         </div>
         <button name="add" id="addCategory" type="button" class="px-2 bg-slate-600 text">+</button>
         </div>
+        
+        @error('category')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+
+
+        <button type="submit" id="submit">Submit</button>
     </form>
 </x-main-layout>
