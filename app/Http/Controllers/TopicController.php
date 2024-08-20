@@ -53,7 +53,7 @@ class TopicController extends Controller
     public function create(Request $request) {
         $request->validate([
             'name' => 'required|string',
-            'categories' => 'required|array',
+            'categories' => 'required|array|max:3',
         ]);
 
         $name = $request->get('name');

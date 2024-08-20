@@ -7,7 +7,7 @@
         @csrf
         @method('POST')
         <label for="name">What's the title?</label>
-        <input type="text" id="name" name="name" />
+        <input type="text" id="name" name="name" autocomplete="off"/>
 
         @error('name')
             <span class="invalid-feedback" role="alert">
@@ -28,14 +28,13 @@
             <button name="confirm" id="addConfirm" type="button" class="px-2 bg-slate-600 text">&#x2713;</button>
         </div>
         <button name="add" id="addCategory" type="button" class="px-2 bg-slate-600 text">+</button>
-        </div>
-        
-        @error('category')
+        @error('categories')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-
+        </div>
+        
 
         <button type="submit" id="submit">Submit</button>
     </form>
