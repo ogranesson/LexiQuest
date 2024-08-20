@@ -14,7 +14,7 @@ Auth::routes();
 
 Route::get('/', function () { // Redirect if authenticated
     return view(Auth::check() ? 'home' : 'welcome');
-});
+})->name('home');
 
 Route::group(['middleware' => function ($request, $next) {
     if (!Auth::check()) {
@@ -22,9 +22,6 @@ Route::group(['middleware' => function ($request, $next) {
     }
     return $next($request);
 }], function() {
-    // home page
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
     // topic routes
     Route::get('/topic/create', [TopicController::class, 'show_create'])->name('create-topic');
     Route::post('/topic/create/submit', [TopicController::class, 'create'])->name('submit-topic');

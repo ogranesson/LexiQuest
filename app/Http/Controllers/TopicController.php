@@ -7,6 +7,7 @@ use App\Models\Topic;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TopicController extends Controller
 {
@@ -40,8 +41,10 @@ class TopicController extends Controller
 
     public function show_create() {
         $categories = DB::table('categories')
-                        ->select('categories.name')
+                        ->select('*')
                         ->get();
+        
+        Log::info($categories);
 
         return view('create-topic', ['categories' => $categories]);
     }
