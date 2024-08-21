@@ -25,7 +25,7 @@ class TopicController extends Controller
             $posts = DB::table('posts')
                     ->join('users', 'users.id', '=', 'posts.user_id')
                     ->where('posts.topic_id', '=', $id)
-                    ->select('posts.*', 'users.first_name', 'users.last_name', 'users.username')
+                    ->select('posts.*', 'users.first_name', 'users.last_name', 'users.username' , 'users.is_banned')
                     ->get();
 
             $categories = DB::table('categories')

@@ -25,4 +25,44 @@ class ProfileController extends Controller
             return response()->view('errors.404', [], 404);
         }
     }
+
+    public function edit($username) {
+        //
+    }
+
+    public function ban($username) {
+        try {
+            $user = User::where('username', $username)->firstOrFail();
+
+            if($user->is_banned != 1) {
+                $user->is_banned = 1;
+                $user->save();
+            }
+            else {
+                return redirect()->back()->with('error', 'User is already banned!');
+            }
+
+            return redirect()->back();
+        } catch (ModelNotFoundException $e) {
+            return response()->view('errors.404', ['message' => 'User \''. $username. '\' not found.'], 404);
+        }
+    }
+
+    public function unban($username) {
+        try {
+            $user = User::where('username', $username)->firstOrFail();
+
+            if($user->is_banned != 0) {
+                $user->is_banned = 0;
+                $user->save();
+            }
+            else {
+                return redirect()->back()->with('error', 'User is not banned!');
+            }
+
+            return redirect()->back();
+        } catch (ModelNotFoundException $e) {
+            return response()->view('errors.404', ['message' => 'User \''. $username. '\' not found.'], 404);
+        }
+    }
 }

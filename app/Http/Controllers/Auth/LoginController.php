@@ -7,6 +7,7 @@ use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -22,6 +23,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validateLogin($request);
+
+        if ($this->attemptLogin($request) === 'banned') {
+            return redirect()->back()->withErrors([
+                'login' => 'You\'re banned. Oops.',
+            ]);
+        }
 
         if ($this->attemptLogin($request)) {
             $request->session()->regenerateToken();
@@ -44,6 +51,12 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         $loginType = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username'; // accepting either email or username
+
+        $user = User::where($loginType, $request->input('login'))->first();
+
+        if ($user && $user->is_banned == 1) {
+            return 'banned';
+        }
 
         return Auth::attempt([
             $loginType => $request->input('login'),

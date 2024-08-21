@@ -38,6 +38,8 @@ Route::group(['middleware' => function ($request, $next) {
 
 Route::middleware([AdminCheck::class])->group(function() {
     Route::get('/admin/dashboard', [AdminController::class, 'view'])->name('view-dashboard');
+    Route::put('/{username}/ban', [ProfileController::class, 'ban'])->name('ban-user');
+    Route::put('/{username}/unban', [ProfileController::class, 'unban'])->name('unban-user');
 });
 
 // catch any other URLs

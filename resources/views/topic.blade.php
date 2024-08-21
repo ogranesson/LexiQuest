@@ -16,7 +16,7 @@
 
         @foreach ($posts as $post)
             <div class="post-container">
-                <p> Posted by <b><a href={{ route('view-profile', ['username' => $post->username])}}> {{ $post->first_name}} {{ $post->last_name }} </a> on {{ $post->created_on }} </b></p>
+                <p> Posted by <b>@if($post->is_banned == 1)[banned user]@else <a href={{ route('view-profile', ['username' => $post->username])}}> {{ $post->first_name}} {{ $post->last_name }} </a> @endif on {{ $post->created_on }}</b></p>
                 <div class="post visible">
                     <p class="post-content"> {{ $post->content }} </p>
                     @if ($post->username == Auth::user()->username)
