@@ -1,21 +1,21 @@
 $(document).ready(function () {
+    $(document).find('.edit-post').hide();
+
     $(document).on('click', '.edit', function (e) { 
-        let content = $(this).closest('.post-container').find('.post-content').text();
-        $(this).closest('.post-container').find('.post-edit-text').val(content);
+        let container = $(this).closest('.post-container');
+        let content = container.find('.post-content').text();
 
-        $(this).closest('.post-container').find('.post').removeClass('visible');
-        $(this).closest('.post-container').find('.post').addClass('hidden');
+        container.find('.post-edit-text').val(content);
 
-        $(this).closest('.post-container').find('.edit-post').removeClass('hidden');
-        $(this).closest('.post-container').find('.edit-post').addClass('visible');
+        container.find('.post').hide();
+        container.find('.edit-post').show();
     });
 
     $(document).on('click', '.cancel', function (e) {
-        $(this).closest('.post-container').find('.post').removeClass('hidden');
-        $(this).closest('.post-container').find('.post').addClass('visible');
+        let container = $(this).closest('.post-container');
 
-        $(this).closest('.post-container').find('.edit-post').removeClass('visible');
-        $(this).closest('.post-container').find('.edit-post').addClass('hidden');
+        container.find('.post').show();
+        container.find('.edit-post').hide();
     });
 
     $(document).on('submit', 'form.delete-form', function(e) {

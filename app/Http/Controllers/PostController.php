@@ -20,18 +20,18 @@ class PostController extends Controller
         return redirect()->route('topic', ['id'=>$topic_id]);
     }
 
-    public function edit(Request $request, $topic_id, $post_id) {
+    public function edit(Request $request, $post_id) {
         $post = Post::findOrFail($post_id);
         $post->content = $request->input('content');
         $post->save();
 
-        return redirect()->route('topic', ['id'=>$topic_id]);
+        return redirect()->back();
     }
 
-    public function delete(Request $request, $topic_id, $post_id) {
+    public function delete($post_id) {
         $post = Post::findOrFail($post_id);
         $post->delete();
         
-        return redirect()->route('topic', ['id'=>$topic_id]);
+        return redirect()->back();
     }
 }

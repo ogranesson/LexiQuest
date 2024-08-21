@@ -22,7 +22,7 @@ class ProfileController extends Controller
 
             return view('profile', ['user' => $user, 'diff' => $diff]);
         } catch (ModelNotFoundException $e) {
-            return response()->view('404', [], 404);
+            return response()->view('errors.404', [], 404);
         }
     }
 }
