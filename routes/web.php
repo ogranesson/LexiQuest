@@ -6,6 +6,7 @@ use App\Http\Controllers\TopicController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 
 use App\Http\Middleware\AdminCheck;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -13,7 +14,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 Auth::routes();
 
 Route::get('/', function () { // Redirect if authenticated
-    return view(Auth::check() ? 'home' : 'welcome');
+    return Auth::check() ? redirect()->route('index') : view('welcome');
 })->name('home');
 
 Route::group(['middleware' => function ($request, $next) {
@@ -22,6 +23,9 @@ Route::group(['middleware' => function ($request, $next) {
     }
     return $next($request);
 }], function() {
+
+    Route::get('/home', [HomeController::class, 'index'])->name('index');
+
     // topic routes
     Route::get('/topic/create', [TopicController::class, 'show_create'])->name('create-topic');
     Route::post('/topic/create/submit', [TopicController::class, 'create'])->name('submit-topic');
