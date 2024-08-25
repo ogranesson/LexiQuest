@@ -18,7 +18,7 @@
         <p>Replies:</p>
 
         @foreach ($posts as $post)
-            <div class="border border-gray-300 rounded-lg mb-3 p-2">
+            <div class="post-container border border-gray-300 rounded-lg mb-3 p-2">
                 <div class="post visible">
                     <p class="post-content font-bold"> {{ $post->content }} </p>
                     <p>@if($post->is_banned == 1)[banned user]@else <a href={{ route('view-profile', ['username' => $post->username])}}> {{ $post->username}} </a> @endif on {{ $post->created_on }}</p>
@@ -39,9 +39,19 @@
                     <button class="cancel">Cancel</button>
                 </form>
             </div>
-            @endif
+            @elseif(Auth::user()->is_admin == 1)
+                    <form method="POST" class="delete-form" action="{{ route('delete-post', ['post_id' => $post->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
                 </div>
             </div>
+            @else
+            </div>
+        </div>
+        @endif
+                
 
         @endforeach
 

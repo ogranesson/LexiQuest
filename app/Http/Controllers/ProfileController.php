@@ -63,7 +63,14 @@ class ProfileController extends Controller
     public function save(Request $request, $username) {
         $user = User::where('username', $username)->firstOrFail();
 
-        $path = 'avatars/default.png';
+        $validated_data = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['nullable', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'photo' => ['sometimes', 'mimes:jpg,jpeg,png', 'max:20480'],
+        ]);
 
         if (request()->hasFile('photo')) {
             $manager = new ImageManager(new Driver([]));
@@ -75,17 +82,18 @@ class ProfileController extends Controller
             $path = 'avatars/' . time() . '_' . Str::random(40) . '.' . $extension;
 
             $image->save(public_path($path));
+            $validated_data['photo'] = $path;
         }
+        else
+        {
+            $validated_data['photo'] = 'avatars/default.png';
+        }
+        
+        $user->fill($validated_data);
 
-        $user->first_name = $request->input('first_name');
-        $user->middle_name = $request->input('middle_name');
-        $user->last_name = $request->input('last_name');
-        $user->username = $request->input('username');
-        $user->country = $request->input('country');
-        $user->email = $request->input('email');
-        $user->photo = $path;
-
-        $user->save();
+        if ($user->isDirty()) {
+            $user->save();
+        }
 
         return redirect()->route('view-profile', ['username' => Auth::user()->username]);
     }
