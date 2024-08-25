@@ -38,6 +38,8 @@ Route::group(['middleware' => function ($request, $next) {
 
     // profile routes
     Route::get('/profile/{username}', [ProfileController::class, 'view'])->name('view-profile');
+    Route::get('/profile/{username}/edit', [ProfileController::class, 'edit'])->name('edit-profile');
+    Route::put('/profile/{username}/save', [ProfileController::class, 'save'])->name('save-profile');
 });
 
 Route::middleware([AdminCheck::class])->group(function() {
