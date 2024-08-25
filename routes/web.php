@@ -26,6 +26,9 @@ Route::group(['middleware' => function ($request, $next) {
 
     Route::get('/home', [HomeController::class, 'index'])->name('index');
 
+    // category routes
+    Route::get('/category/{category_id}', [HomeController::class, 'category'])->name('category-view');
+
     // topic routes
     Route::get('/topic/create', [TopicController::class, 'show_create'])->name('create-topic');
     Route::post('/topic/create/submit', [TopicController::class, 'create'])->name('submit-topic');

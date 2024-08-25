@@ -19,7 +19,7 @@ class TopicController extends Controller
             $author = DB::table('topics')
                     ->join('users', 'users.id', '=', 'topics.user_id')
                     ->where('topics.id', '=', $id)
-                    ->select('users.first_name', 'users.last_name')
+                    ->select('users.first_name', 'users.last_name', 'users.username')
                     ->first();
                     
             $posts = DB::table('posts')

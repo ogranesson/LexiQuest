@@ -37,5 +37,5 @@
                 {!! __('pagination.next') !!}
             </div>
         @endif
-    </nav>
+        </div>
 @endif
