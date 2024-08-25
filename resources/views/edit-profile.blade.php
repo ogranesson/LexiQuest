@@ -61,7 +61,7 @@
 
                     <div class="mb-5">
                         <label for="country" class="block text-violet-800 ml-2 mb-2">{{ __('Select your country') }}<span class="text-red-600"> *</span></label>
-                        <select id="country" class="w-full p-2 border rounded-lg @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required>
+                        <select id="country" class="w-full p-2 border rounded-lg @error('country') is-invalid @enderror" name="country" required>
                             <option value="Not specified">Not specified</option>
                             @foreach($countries as $country)
                                 <option value="{{ $country }}" @if($country == Auth::user()->country) selected @endif>{{ $country }}</option>

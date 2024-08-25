@@ -67,6 +67,7 @@ class ProfileController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username,' . $user->id],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'photo' => ['sometimes', 'mimes:jpg,jpeg,png', 'max:20480'],
@@ -91,7 +92,8 @@ class ProfileController extends Controller
         
         $user->fill($validated_data);
 
-        if ($user->isDirty()) {
+        if ($user->isDirty())
+        {
             $user->save();
         }
 
