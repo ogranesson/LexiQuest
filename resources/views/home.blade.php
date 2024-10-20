@@ -1,8 +1,8 @@
-<x-main-layout title="LinguaQuest - Home Page">
+<x-main-layout title="LexiQuest - Home Page">
     <div class="flex flex-row gap-2">
         <div class="p-4 rounded-lg bg-white w-5/6">
             <div class="text-center mb-3">
-                <p class="text-violet-900 text-3xl font-bold mb-3">Welcome to LinguaQuest!</p>
+                <p class="text-violet-900 text-3xl font-bold mb-3">Welcome to LexiQuest!</p>
                 <a class="text-white p-3 rounded-lg text-xl font-bold bg-violet-900" href="{{ route('create-topic') }}">Create a topic</a>
             </div>
             @if (isset($selected_category))

@@ -1,66 +1,129 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LexiQuest
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Setup Instructions
 
-## About Laravel
+This document will guide you through setting up and running LexiQuest, including database setup, server requirements, and development tools.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Before starting, ensure you have the following installed on your machine:
 
-## Learning Laravel
+- **[PHP 8.x](https://www.php.net/downloads.php)**
+- **[Composer](https://getcomposer.org/download/)**
+- **[XAMPP](https://www.apachefriends.org/index.html)** (for MySQL and phpMyAdmin)
+- **[Node.js](https://nodejs.org/en/download/)** (for npm)
+- **[Git](https://git-scm.com/downloads)** (optional, for version control)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Installation Steps
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Clone the repository**  
+   Clone the repository to your local machine using Git or download the zip file.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   git clone <your-repo-url>
+   cd <project-directory>
+   ```
 
-## Laravel Sponsors
+2. **Install PHP Dependencies**  
+   Install all PHP dependencies using Composer.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```bash
+   composer install
+   ```
 
-### Premium Partners
+3. **Install Node Modules**  
+   Install the required node packages.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   ```bash
+   npm install
+   npm audit fix
+   ```
 
-## Contributing
+4. **Environment Configuration**  
+   Copy the `.env.example` file to `.env` and configure the environment variables.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   cp .env.example .env
+   ```
 
-## Code of Conduct
+   Edit the `.env` file and update the following fields to match your MySQL database setup:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=<your-database-name>
+   DB_USERNAME=<your-mysql-username>
+   DB_PASSWORD=<your-mysql-password>
+   ```
 
-## Security Vulnerabilities
+5. **Set Up MySQL Database**  
+   - Open **XAMPP** and start **Apache** and **MySQL** servers.
+   - Access **phpMyAdmin** via [localhost/phpmyadmin](http://localhost/phpmyadmin).
+   - Create a new MySQL database with the name specified in your `.env` file.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Run Migrations & Seeders**  
+   To set up the database schema and seed the necessary data, run the following Artisan commands:
 
-## License
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. **Build Frontend Assets**  
+   To compile the front-end assets (CSS, JS, etc.), run:
+
+   ```bash
+   npm run dev
+   ```
+
+8. **Start the Development Server**  
+   Finally, you can start the development server by running:
+
+   ```bash
+   php artisan serve
+   ```
+
+   The application will be accessible at `http://127.0.0.1:8000`.
+
+---
+
+### Optional Commands
+
+- **To run the database migrations with seeders again (resetting the database):**
+
+  ```bash
+  php artisan migrate:fresh --seed
+  ```
+
+- **To watch for file changes and recompile assets:**
+
+  ```bash
+  npm run watch
+  ```
+
+---
+
+### Troubleshooting
+
+- **XAMPP MySQL not starting:**  
+  Ensure no other service is using the default MySQL port (3306). If needed, change the MySQL port in the XAMPP settings and update the `.env` file accordingly.
+  
+- **Permission issues:**  
+  Ensure the proper file permissions are set for the project folder, especially for directories like `storage` and `bootstrap/cache`.
+
+---
+
+### Credits
+
+- **Laravel** - [Official Documentation](https://laravel.com/docs)
+- **XAMPP** - [Official Documentation](https://www.apachefriends.org/index.html)
+- **Composer** - [Official Documentation](https://getcomposer.org/doc/)
+
+---
+
+### License
+
+This project is open-source and freely available under the [MIT License](LICENSE.md).

@@ -1,4 +1,4 @@
-<x-main-layout title="Register - LinguaQuest">
+<x-main-layout title="Register - LexiQuest">
     <div class="flex items-center my-10">
         <div class="bg-white align-middle rounded-lg p-4 w-1/2 m-auto drop-shadow-xl shadow-violet-950">
             <div class="block text-center text-3xl text-violet-700 font-bold mb-6">{{ __('Register') }}</div>

@@ -1,4 +1,4 @@
-<x-main-layout title="Login - LinguaQuest">
+<x-main-layout title="Login - LexiQuest">
     <div class="flex items-center" style="height: calc(100vh - 120px);">
         <div class="bg-white align-middle rounded-lg p-4 w-1/3 m-auto drop-shadow-xl shadow-violet-950">
             <div class="block text-center text-3xl text-violet-700 font-bold mb-6">{{ __('Login') }}</div>

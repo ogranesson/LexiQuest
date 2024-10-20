@@ -18,7 +18,7 @@
 
 <body class="bg-violet-200">
     <div class="bg-violet-400 top-0 flex w-full justify-between items-center fixed drop-shadow-lg z-10">
-        <a class="block px-8 h-full text-white text-xl" href="{{ route('home') }}"><span class="text-violet-900 font-bold">Lingua</span>Quest</p>
+        <a class="block px-8 h-full text-white text-xl" href="{{ route('home') }}"><span class="text-violet-900 font-bold">Lexi</span>Quest</p>
         <ul class="m-0 p-0 after:content-[''] flex flex-row items-center after:block after:clear-both">
         @guest
             @if (Route::has('login'))
